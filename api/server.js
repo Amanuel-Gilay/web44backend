@@ -3,6 +3,12 @@ const helmet = require('helmet')
 const cors = require('cors')
 const db = require('./data/db-config')
 
+//import router
+// const authRouter = require('./auth/auth-router')
+// const usersRouter = require('./users/users-router')
+// const potlucksRouter = require('./potlucks/potlucks-router')
+// const foodsRouter = require('./foods/foods-router')
+
 function getAllUsers() { return db('users') }
 
 async function insertUser(user) {
@@ -18,9 +24,17 @@ server.use(express.json())
 server.use(helmet())
 server.use(cors())
 
+//use routers
+// server.use('/api/auth', authRouter)
+// server.use('/api/users', usersRouter)
+// server.use('/api/potlucks', potlucksRouter)
+// server.use('/api/foods', foodsRouter)
+
 server.get('/api/users', async (req, res) => {
   res.json(await getAllUsers())
 })
+
+
 
 server.post('/api/users', async (req, res) => {
   res.status(201).json(await insertUser(req.body))
